@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hibiki NPC</title>
+  <style>
+    body { margin: 0; background: #000; }
+    canvas { position: absolute; top: 0; left: 0; z-index: 0; }
+    #dialogue { position: absolute; bottom: 20px; left: 20px; z-index: 1; }
+    button { margin: 4px; padding: 10px 15px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <canvas id="live2d" width="400" height="600"></canvas>
+
+  <div id="dialogue">
+    <button onclick="speak('Welcome, traveler.')">Greet</button>
+    <button onclick="speak('I am Hibiki, shrine guardian.')">Who are you?</button>
+    <button onclick="speak('The path to the next quest is west.')">Where do I go?</button>
+  </div>
+
+  <!-- Live2D SDK -->
+  <script src="https://unpkg.com/pixi.js/dist/pixi.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.0.6/lib/L2Dwidget.min.js"></script>
+
+  <!-- TTS and Widget Init -->
+  <script>
+    function speak(text) {
+      const msg = new SpeechSynthesisUtterance(text);
+      msg.pitch = 1;
+      msg.rate = 1;
+      msg.lang = 'en-US';
+      speechSynthesis.speak(msg);
+    }
+
+    L2Dwidget.init({
+      model: {
+        jsonPath: "./live2d-models/hibiki/hibiki.model3.json",
+      },
+      display: { width: 400, height: 600, position: "left" },
+      mobile: { show: true },
+      react: { opacityDefault: 1, opacityOnHover: 1 }
+    });
+  </script>
+</body>
+</html>
