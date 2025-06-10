@@ -20,8 +20,8 @@
 
   <!-- Live2D Cubism SDK -->
   <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pixi.js@5.3.3/dist/pixi.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pixi.js@5.3.3/dist/pixi-legacy.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display@0.4.0/dist/index.min.js"></script>
 
   <script>
     function speak(text) {
@@ -32,12 +32,13 @@
       speechSynthesis.speak(msg);
     }
 
-    // Initialize PIXI Application
+    // Initialize PIXI Application with WebGL fallback
     const app = new PIXI.Application({
       view: document.getElementById('live2d'),
       transparent: true,
       width: 400,
-      height: 600
+      height: 600,
+      forceCanvas: true // Force canvas renderer as fallback
     });
 
     // Initialize Live2D
@@ -46,7 +47,10 @@
     // Load the model
     async function loadModel() {
       try {
-        const model = await PIXI.live2d.Live2DModel.from('live2d-models/hibiki/hibiki.model3.json');
+        const model = await PIXI.live2d.Live2DModel.from('live2d-models/hibiki/hibiki.model3.json', {
+          autoInteract: false,
+          motionPreload: 'Idle'
+        });
         
         // Center the model
         model.scale.set(0.25);
