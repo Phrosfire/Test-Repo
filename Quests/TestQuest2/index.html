@@ -18,11 +18,10 @@
     <button onclick="speak('The path to the next quest is west.')">Where do I go?</button>
   </div>
 
-  <!-- Live2D SDK -->
+  <!-- ✅ Correct Cubism 3+ widget -->
   <script src="https://unpkg.com/pixi.js/dist/pixi.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.0.6/lib/L2Dwidget.min.js"></script>
 
-  <!-- TTS and Widget Init -->
   <script>
     function speak(text) {
       const msg = new SpeechSynthesisUtterance(text);
@@ -32,6 +31,7 @@
       speechSynthesis.speak(msg);
     }
 
+    console.log("Loading Live2D model...");
     L2Dwidget.init({
       model: {
         jsonPath: "live2d-models/hibiki/hibiki.model3.json"
