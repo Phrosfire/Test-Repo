@@ -1,6 +1,24 @@
 {
   "Version": 3,
-  "FileReferences": {},
+  "FileReferences": {
+    "Moc": "hibiki.moc3",
+    "Textures": [
+      "hibiki.2048/texture_00.png"
+    ],
+    "Physics": "hibiki.physics3.json",
+    "Expressions": [
+      {
+        "Name": "expressions/exp1.exp3.json"
+      }
+    ],
+    "Motions": {
+      "Idle": [
+        {
+          "File": "motion/idle.motion3.json"
+        }
+      ]
+    }
+  },
   "Groups": [],
   "HitAreas": []
 }
