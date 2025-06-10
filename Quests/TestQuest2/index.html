@@ -18,7 +18,7 @@
     <button onclick="speak('The path to the next quest is west.')">Where do I go?</button>
   </div>
 
-  <!-- ✅ Correct Live2D Cubism 3/4 widget (no PlatformManager.js etc.) -->
+  <!-- Live2D Cubism 3/4 widget -->
   <script src="https://unpkg.com/pixi.js/dist/pixi.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.0.6/lib/L2Dwidget.min.js"></script>
 
@@ -34,11 +34,29 @@
     console.log("Loading Live2D model...");
     L2Dwidget.init({
       model: {
-        jsonPath: "live2d-models/hibiki/hibiki.model3.json"
+        jsonPath: "live2d-models/hibiki/hibiki.model3.json",
+        scale: 1,
+        hHeadPos: 0.5,
+        vHeadPos: 0.618
       },
-      display: { width: 400, height: 600, position: "left" },
-      mobile: { show: true },
-      react: { opacityDefault: 1, opacityOnHover: 1 }
+      display: {
+        width: 400,
+        height: 600,
+        position: "left",
+        hOffset: 0,
+        vOffset: 0
+      },
+      mobile: {
+        show: true,
+        scale: 0.5
+      },
+      react: {
+        opacityDefault: 1,
+        opacityOnHover: 1
+      },
+      dialog: {
+        enable: false
+      }
     });
   </script>
 </body>
