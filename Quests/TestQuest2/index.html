@@ -18,10 +18,10 @@
     <button onclick="speak('The path to the next quest is west.')">Where do I go?</button>
   </div>
 
-  <!-- Live2D Cubism SDK -->
-  <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+  <!-- Live2D Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/pixi.js@4.8.9/dist/pixi.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display@0.3.0/dist/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/live2d-widget@0.3.0/lib/live2d.min.js"></script>
 
   <script>
     function speak(text) {
@@ -32,21 +32,22 @@
       speechSynthesis.speak(msg);
     }
 
-    // Initialize PIXI Application
-    const app = new PIXI.Application({
-      view: document.getElementById('live2d'),
-      transparent: true,
-      width: 400,
-      height: 600,
-      antialias: true
-    });
-
-    // Initialize Live2D
-    PIXI.live2d.Live2DModel.registerTicker(PIXI.Ticker);
-
-    // Load the model
-    async function loadModel() {
+    // Wait for all resources to load
+    window.addEventListener('load', async () => {
       try {
+        // Initialize PIXI Application
+        const app = new PIXI.Application({
+          view: document.getElementById('live2d'),
+          transparent: true,
+          width: 400,
+          height: 600,
+          antialias: true
+        });
+
+        // Initialize Live2D
+        PIXI.live2d.Live2DModel.registerTicker(PIXI.Ticker);
+
+        // Load the model
         const model = await PIXI.live2d.Live2DModel.from('live2d-models/hibiki/hibiki.model3.json');
         
         // Center the model
@@ -62,10 +63,7 @@
       } catch (error) {
         console.error('Failed to load model:', error);
       }
-    }
-
-    // Load the model when the page loads
-    window.addEventListener('load', loadModel);
+    });
   </script>
 </body>
 </html>
