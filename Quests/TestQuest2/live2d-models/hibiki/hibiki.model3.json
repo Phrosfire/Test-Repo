@@ -1,12 +1,6 @@
 {
   "Version": 3,
-  "FileReferences": {
-    "Moc": "hibiki.moc3",
-    "Textures": [
-      "hibiki.2048/texture_00.png"
-    ],
-    "Physics": "hibiki.physics3.json"
-  },
+  "FileReferences": {},
   "Groups": [],
   "HitAreas": []
 }
