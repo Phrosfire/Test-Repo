@@ -18,9 +18,10 @@
     <button onclick="speak('The path to the next quest is west.')">Where do I go?</button>
   </div>
 
-  <!-- Live2D Cubism 3/4 widget -->
-  <script src="https://unpkg.com/pixi.js/dist/pixi.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.0.6/lib/L2Dwidget.min.js"></script>
+  <!-- Live2D Cubism SDK -->
+  <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pixi.js@5.3.3/dist/pixi.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
 
   <script>
     function speak(text) {
@@ -31,33 +32,39 @@
       speechSynthesis.speak(msg);
     }
 
-    console.log("Loading Live2D model...");
-    L2Dwidget.init({
-      model: {
-        jsonPath: "live2d-models/hibiki/hibiki.model3.json",
-        scale: 1,
-        hHeadPos: 0.5,
-        vHeadPos: 0.618
-      },
-      display: {
-        width: 400,
-        height: 600,
-        position: "left",
-        hOffset: 0,
-        vOffset: 0
-      },
-      mobile: {
-        show: true,
-        scale: 0.5
-      },
-      react: {
-        opacityDefault: 1,
-        opacityOnHover: 1
-      },
-      dialog: {
-        enable: false
-      }
+    // Initialize PIXI Application
+    const app = new PIXI.Application({
+      view: document.getElementById('live2d'),
+      transparent: true,
+      width: 400,
+      height: 600
     });
+
+    // Initialize Live2D
+    PIXI.live2d.Live2DModel.registerTicker(PIXI.Ticker);
+
+    // Load the model
+    async function loadModel() {
+      try {
+        const model = await PIXI.live2d.Live2DModel.from('live2d-models/hibiki/hibiki.model3.json');
+        
+        // Center the model
+        model.scale.set(0.25);
+        model.x = app.screen.width / 2;
+        model.y = app.screen.height / 2;
+        
+        // Add to stage
+        app.stage.addChild(model);
+        
+        // Start animation
+        model.motion('Idle');
+      } catch (error) {
+        console.error('Failed to load model:', error);
+      }
+    }
+
+    // Load the model when the page loads
+    window.addEventListener('load', loadModel);
   </script>
 </body>
 </html>
